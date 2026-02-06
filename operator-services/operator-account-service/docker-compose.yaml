@@ -3,7 +3,7 @@ services:
   mongodb-operator-management-service:
     image: mongo:8.2
     environment:
-      - MONGO_INITDB_DATABASE=operator-management-service
+      - MONGO_INITDB_DATABASE=operator-account-service
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=foo
     ports:

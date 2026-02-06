@@ -1,4 +1,4 @@
-name: operator-management-service-tests
+name: operator-account-service-tests
 
 on:
   push:
@@ -14,18 +14,18 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v6.2.0
         with:
-          go-version-file: operator-services/operator-management-service/go.mod
+          go-version-file: operator-services/operator-account-service/go.mod
           cache: true
 
       - name: Display Go Version
         run: go version
 
       - name: Download dependencies
-        working-directory: operator-services/operator-management-service
+        working-directory: operator-services/operator-account-service
         run: go mod download
 
       - name: Build
-        working-directory: operator-services/operator-management-service
+        working-directory: operator-services/operator-account-service
         run: |
           CGO_ENABLED=0 go build \
             -ldflags='-s -w' \
@@ -33,5 +33,5 @@ jobs:
             ./cmd/main.go
 
       - name: Test
-        working-directory: operator-services/operator-management-service
+        working-directory: operator-services/operator-account-service
         run: go test ./...
