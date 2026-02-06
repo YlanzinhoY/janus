@@ -1,4 +1,4 @@
-name: operator-management-service-tests.yml
+ame: operator-management-service-tests
 
 on:
   push:
@@ -10,15 +10,28 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - name: setup-go
+
+      - name: Setup Go
         uses: actions/setup-go@v6.2.0
         with:
-          go-version: 1.25.5
+          go-version-file: operator-services/operator-management-service/go.mod
+          cache: true
+
       - name: Display Go Version
         run: go version
-      - name: install-dependencies
+
+      - name: Download dependencies
+        working-directory: operator-services/operator-management-service
         run: go mod download
+
       - name: Build
-        run: CGO_ENABLED=0 go build -ldflags='-s -w' -o  app-test ./operator-management-service/cmd/main.go
-      - name: Test with the Go CLI
-        run: go test
+        working-directory: operator-services/operator-management-service
+        run: |
+          CGO_ENABLED=0 go build \
+            -ldflags='-s -w' \
+            -o app-test \
+            ./cmd/main.go
+
+      - name: Test
+        working-directory: operator-services/operator-management-service
+        run: go test ./...
