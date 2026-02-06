@@ -1,4 +1,5 @@
 name: operator-management-service-tests.yml
+
 on:
   push:
     branches: [ master, develop, feature/* ]
@@ -10,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: setup-go
-        uses: actions/setup-go
+        uses: actions/setup-go@v6.2.0
         with:
           go-version: 1.25.5
       - name: Display Go Version
