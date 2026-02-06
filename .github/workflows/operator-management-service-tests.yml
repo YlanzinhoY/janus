@@ -1,4 +1,4 @@
-ame: operator-management-service-tests
+name: operator-management-service-tests
 
 on:
   push:
