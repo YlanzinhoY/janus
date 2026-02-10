@@ -6,6 +6,7 @@ import (
 	"ylanzinhoy-operator-management/internal/domain/entity/operator"
 	"ylanzinhoy-operator-management/internal/infrastructure/persistence/storage"
 
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -14,6 +15,8 @@ type Adapter struct {
 }
 
 func (a *Adapter) InsertOperator(ctx context.Context, insertOperatorDto InsertOperatorDTO) (any, error) {
+
+	uid := uuid.New()
 
 	name, err := operatorEntity.NewName(insertOperatorDto.Name)
 
@@ -61,7 +64,7 @@ func (a *Adapter) InsertOperator(ctx context.Context, insertOperatorDto InsertOp
 		return nil, err
 	}
 
-	newOperatorEntity, err := operatorEntity.NewOperator(name, email, phone, passwordHash, address, vat)
+	newOperatorEntity, err := operatorEntity.NewOperator(uid, name, email, phone, passwordHash, address, vat)
 	if err != nil {
 		return nil, err
 	}
