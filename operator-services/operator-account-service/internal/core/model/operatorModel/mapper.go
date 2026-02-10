@@ -3,9 +3,13 @@ package operatormodel
 import (
 	"fmt"
 	operatorEntity "ylanzinhoy-operator-management/internal/domain/entity/operator"
+
+	"github.com/google/uuid"
 )
 
 func ModelToEntity(model OperatorModel) (*operatorEntity.Operator, error) {
+
+	uid := uuid.New()
 
 	email, err := operatorEntity.NewEmail(model.Email)
 	if err != nil {
@@ -45,7 +49,7 @@ func ModelToEntity(model OperatorModel) (*operatorEntity.Operator, error) {
 		return nil, fmt.Errorf("fail to convert model to entity (vatNumber): %w", err)
 	}
 
-	operator, err := operatorEntity.NewOperator(name, email, phone, password, address, vatNumber)
+	operator, err := operatorEntity.NewOperator(uid, name, email, phone, password, address, vatNumber)
 	if err != nil {
 		return nil, fmt.Errorf("fail to create operator entity: %w", err)
 	}
@@ -54,6 +58,7 @@ func ModelToEntity(model OperatorModel) (*operatorEntity.Operator, error) {
 }
 func EntityToModel(entity *operatorEntity.Operator) *OperatorModel {
 	return &OperatorModel{
+		uid:      entity.Uid.String(),
 		Name:     entity.Name.Value,
 		Email:    entity.Email.Value,
 		Phone:    entity.Phone.Value,
