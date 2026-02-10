@@ -1,6 +1,9 @@
 package operatorEntity
 
+import "github.com/google/uuid"
+
 type Operator struct {
+	Uid       uuid.UUID
 	Name      Name
 	Email     Email
 	Password  Password
@@ -10,6 +13,7 @@ type Operator struct {
 }
 
 func NewOperator(
+	uid uuid.UUID,
 	name Name,
 	email Email,
 	phone Phone,
