@@ -1,6 +1,7 @@
 package operatorUseCase
 
 type InsertOperatorDTO struct {
+	uid       string       `validate:"required" json:"uid"`
 	Name      string       `validate:"required" json:"name"`
 	Email     string       `validate:"required,email" json:"email"`
 	Phone     string       `validate:"required" json:"phone"`
@@ -18,6 +19,7 @@ type AddressInput struct {
 }
 
 type FetchAllOperatorsOutput struct {
+	uid       string       `json:"uid"`
 	Name      string       `json:"name"`
 	Email     string       `json:"email"`
 	Phone     string       `json:"phone"`
