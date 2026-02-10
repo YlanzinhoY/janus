@@ -6,6 +6,7 @@ import (
 
 // mongodb
 type OperatorModel struct {
+	uid       string    `bson:"uid"`
 	Name      string    `bson:"name"`
 	Email     string    `bson:"email"`
 	Phone     string    `bson:"phone"`
@@ -17,6 +18,7 @@ type OperatorModel struct {
 }
 
 func NewOperatorModel(
+	uid string,
 	name string,
 	email string,
 	phone string,
